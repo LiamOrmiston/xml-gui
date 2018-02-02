@@ -3,12 +3,12 @@
   <head>
 
     <!-- Automatically updated by your package.json file. -->
-    <title class="applicationTitle">Your Application Name</title>
+    <title class="applicationTitle">XML GUI</title>
 
     <link rel="icon" type="image/x-icon" href="_img/favicon.ico">
     <link rel="stylesheet" href="_style/ven.bootstrap.css">
     <!-- Change this next line from cerulean to whatever swatch you pick. -->
-    <link rel="stylesheet" href="_style/ven.bootswatch/cerulean.min.css" data-swatch="swapper">
+    <link rel="stylesheet" href="_style/ven.bootswatch/slate.min.css" data-swatch="swapper">
     <link rel="stylesheet" href="_style/ugui-devtools.css">
     <link rel="stylesheet" href="_style/style.css">
 
@@ -48,40 +48,23 @@
       /////////////////////////////////////////////////////////////////
     -->
 
-    <cmd executable="cli_filename">
+    <cmd executable="xml">
 
-      <arg>"((folderPicker.folderName))"</arg>
-
-      <arg>((catSoundsMeow))</arg>
-      <arg>((catSoundsPurr))</arg>
-      <arg>((catSoundsNyan))</arg>
-
-      <arg>--speed ((speedVsQuality))mph</arg>
-
-      <arg>The best ((fruitPlum)) around!</arg>
-      <arg>((fruitKiwi))</arg>
-      <arg>((fruitPear))</arg>
-
-      <arg>((vegPotato))</arg>
-      <arg>((vegCarrot))</arg>
-      <arg>((vegCelery))</arg>
-      <arg>((vegGinger))</arg>
-
-      <arg>--dogsound=((dogSounds))</arg>
-
-      <def name="quality">((min)),((max))</def>
-      <arg>((quality.min))-((quality.max))</arg>
-
-      <arg>-m "((userMessage))"</arg>
-
-      <arg>((colorful.rgb))</arg>
-
-      <arg>"((fileToProcess.path))((fileToProcess.name)).new.((fileToProcess.ext))"</arg>
+      <arg>ed -u</arg>
+      <arg>"/prodcat/products/product[@id='((prod-id))']/@name"</arg>
+      <arg>-v ((value))</arg>
+      <arg>books.xml</arg>
 
     </cmd>
 
-    <cmd executable="second_cli">
-      <arg>((winewhite)) "((winetext))"</arg>
+    <cmd executable="grep">
+
+      <arg>-C ((num))</arg>
+      <arg>--colour=always</arg>
+      <arg>-n -i</arg>
+      <arg>"((search_term))"</arg>
+      <arg>books.xml</arg>
+
     </cmd>
 
   </head>
@@ -124,7 +107,7 @@
           </button>
           <a class="navbar-brand">
             <img src="_img/logo.png" alt="Logo" />
-            <span class="applicationTitle">Your Application Name</span>
+            <span class="applicationTitle">XML GUI</span>
           </a>
         </div>
         <div class="navbar-collapse collapse">
@@ -203,7 +186,7 @@
       -->
 
       <section>
-        <form id="cli_filename" role="form-inline">
+        <!-- <form id="XML" role="form-inline">
 
           <div class="ezdz form-group jumbotron text-center well h3" title="Click to browse for your file.">
             <span class="imageContainer"></span>
@@ -251,9 +234,9 @@
               <label>Color Picker:</label>
               <input type="color" data-argName="colorful" value="#000000" />
             </div>
-          </div>
+          </div> -->
 
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-xs-12 col-s-6 col-md-6 col-l-6">
               <label for="speed">Speed vs Quality:</label><br />
               <table>
@@ -289,22 +272,29 @@
             </div>
           </div>
 
-        </form>
+        </form> -->
 
         <hr />
 
-        <form id="second_cli" role="form-inline">
+        <form id="xml" role="form-inline">
 
           <div class="row">
             <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
-              <p>Prevent running the command unless the checkbox is checked and text filled in.</p>
+              <p>Enter the product id.</p>
             </div>
             <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
               <div class="input-group">
-                <span class="input-group-addon">
-                  <input type="checkbox" data-argName="winewhite" value="-message" required="required" aria-label="winewhite" />
-                </span>
-                <input type="text" class="form-control" data-argName="winetext" required="required" aria-label="winewhite" />
+                <input type="text" data-argName="prod-id" required="required" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <p>Enter the new product name.</p>
+            </div>
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <div class="input-group">
+                <input type="text" data-argName="value" required="required" />
               </div>
             </div>
           </div>
@@ -322,6 +312,43 @@
             </div>
           </div>
 
+        </form>
+        <form id="grep" role="form-inline">
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <p>Enter term you want to find</p>
+            </div>
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <div class="input-group">
+                <input type="text" data-argName="search_term" required="required" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-s-6 col-md-6 col-l-6">
+              <label for="lines">Number of lines surrounding search term</label><br />
+              <table>
+                <tr>
+                  <td class="text-center"><span>Fewer lines</span></td>
+                  <td><input class="slider" type="text" id="lines" data-argName="num" data-slider-id="numSlider" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="5" /></td>
+                  <td class="text-center"><span>More lines</span></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <p>Text output that would normally be returned to the command prompt, can be placed in elements with a <code>returnedCmdText</code> class.</p>
+            </div>
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <pre class="returnedCmdText">Returned text will be displayed here.</pre>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12 text-right">
+              <button type="submit" class="sendCmdArgs btn btn-default">Go!</button>
+            </div>
+          </div>
         </form>
 
 
@@ -391,13 +418,6 @@
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
     </div> <!-- end container -->
   </body>
 </html>
